@@ -123,7 +123,7 @@ namespace UpgradedTrashCans
             {
                 Log.Warn($"{baseDef.Name} has no icon.");
             }
-            // ✅ Use the network-safe built prefab (no cloning)
+            // Use the network-safe built prefab (no cloning)
             def.BuiltItem = baseDef.BuiltItem;
 
             // Track definition for runtime customization
@@ -156,7 +156,7 @@ namespace UpgradedTrashCans
             else
                 Log.Debug($"{baseDef.Name} icon not found.");
 
-            // ✅ Reuse the base prefab
+            // Reuse the base prefab
             def.Equippable = baseDef.Equippable;
 
             DefinitionTracker.TrackDefinition(def);
