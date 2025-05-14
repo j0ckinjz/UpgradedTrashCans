@@ -54,7 +54,8 @@ namespace UpgradedTrashCans
                 payload.Append(LobbyTagPrefix + CurrentSyncVersion + "|");
                 foreach (var variant in TrashCanVariants.All)
                 {
-                    payload.Append($"{variant.ID}:{variant.Price},{variant.Capacity},{variant.Radius},{variant.Color.r:F2},{variant.Color.g:F2},{variant.Color.b:F2},{(int)variant.RequiredRank},{variant.Tier},1;");
+                    int unlock = variant.UnlockImmediately ? 1 : 0;
+                    payload.Append($"{variant.ID}:{variant.Price},{variant.Capacity},{variant.Radius},{variant.Color.r:F2},{variant.Color.g:F2},{variant.Color.b:F2},{(int)variant.RequiredRank},{variant.Tier},{unlock};");
                 }
                 foreach (var variant in TrashGrabberVariants.All)
                 {
