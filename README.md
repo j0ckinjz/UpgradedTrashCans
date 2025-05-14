@@ -1,92 +1,129 @@
+# 📦 Upgraded Trash Cans — Smarter Waste Management for *Schedule I*
 
-# 📦 UpgradedTrashCans — MelonLoader Mod for *Schedule I*
+> **Main Il2Cpp Branch** — Now supports Mono via alternate build!
 
-This mod adds **two purchasable trash can upgrades** and a new **trash grabber pro** to the Hardware Store in *Schedule I*:
-
-- 🗑️ **Trash Bin** – 40 capacity
-- 🗑️ **Trash Compactor** – 100 capacity
-- 🤖 **Trash Grabber Pro** – 50 capacity
-
-These upgraded trash cans & grabber appear alongside the default model and function identically, but with improved stats and visual tinting.
+This mod enhances trash-related gameplay by adding **two new trash can upgrades** and a **pro-level grabber** to the Hardware Store — all customizable and fully multiplayer compatible.
 
 ---
 
-## 🛒 Default Shop Settings
+## 🗑️ Hardware Store Upgrades
 
-| Variant           | Price  | Capacity | Pickup Radius  | Unlock Rank  | Tier  |
-|-------------------|--------|----------|----------------|--------------|-------|
-| Default           | $25    | 20       | 4.0 units      | N/A          | N/A   |
-| Trash Bin         | $250   | 40       | 5.0 units      | Hoodlum      | 1     |
-| Trash Compactor   | $1000  | 100      | 8.0 units      | Hustler      | 5     |
-| Trash Grabber     | $750   | 50       | N/A            | Hustler      | 1     |
+- **Trash Bin** — 40 capacity, medium cleaner radius  
+- **Trash Compactor** — 100 capacity, large cleaner radius  
+- **Trash Grabber Pro** — 50 capacity
 
-- 🏗️ Placed using the normal building grid.
-- 💾 Persist across save/load cycles.
-- 🖼️ Custom shop icons and model tinting for each variant.
-- 🧼 Color tint is visible even when stored on a shelf.
-- 🔄 All models reuse base game prefabs with enhanced behavior.
+Each variant:
+- Has custom price, name, and color tint
+- Uses original game models with enhanced stats
+- Unlocks via rank or instantly (configurable)
+- Works in multiplayer with full sync
 
 ---
 
-## ⚙️ Customization (Optional)
+## ⚙️ Customization via Mod Manager (Optional)
 
-Settings can be changed in-game via the **Mod Manager Phone App**, including:
+Use the in-game Mod Manager Phone App to adjust:
+- Price, capacity, radius (for cans)
+- Color mode: standard, extended, or custom RGB
+- Unlock rank, tier, or toggle unlock immediately  
+*Changes apply on the next scene load.*
 
-- 🛠️ **Capacity**
-- 🎯 **Cleaner Pickup Radius** (for trash cans)
-- 🎨 **Color Tint**
-- 🎖️ **Rank & Tier Unlock**
-- 💸 **Price**
-- 🔓 **Unlock Immediately** (bypass rank restrictions)
-
-**To customize:**
-1. Open the Mod Manager Phone App
-2. Tap into **Upgraded Trash Can**
-3. Adjust any value to your liking  
-*Changes apply on next scene load.*
+> 💡 If dropdowns aren’t working, update Mod Manager.
 
 ---
 
-## 🔄 **Multiplayer Sync**
-  
-- The **host’s settings** are automatically synced to all clients
-- Sync includes:
-  - Capacity
-  - Trash Can Radius
-  - Color
-  - Required rank & tier
-  - UnlockImmediately flag
-- Clients wait for settings to become available using a safe fallback retry loop
-- Version compatibility is checked between host and client before applying settings
-- Clients will not inject upgraded items if host mod is disabled or missing
+## 🎨 Using Custom RGB Values
+
+You can manually enter RGB color values in the Mod Manager:
+
+- **Format**: `R,G,B`  
+- **Example**: `0.2f, 0.8f, 0.2f` → bright lime green  
+- Alpha is always set to `1f` (fully opaque)
+
+Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReference/Color.html)
+
+> Tip: You can use full decimal precision or round to 2 decimal places.
 
 ---
 
-## 📁 Installation
+## 🔄 Multiplayer Sync
 
-1. Install **MelonLoader** for *Schedule I*
-2. Drop `UpgradedTrashCans.dll` into the `Mods` folder
-3. Launch the game and enjoy smarter waste management
+- Host settings override all clients
+- Variants sync on join with a retry system
+- Mod disables injection if host does not have the mod
+
+---
+
+## 🧑‍🤝‍🧑 Compatibility Matrix
+
+| Host | Client | Result |
+|------|--------|--------|
+| ✅ Has Mod | ✅ Has Mod | Full sync — correct variants and stats |
+| ✅ Has Mod | ❌ No Mod  | Partial — client sees base visuals, can't pick up |
+| ❌ No Mod  | ✅ Has Mod | No injection — mod disables itself |
+
+---
+
+## ⚠️ Known Issues
+
+- Saving without the mod will remove upgraded items from your save  
+- In multiplayer, remote players may briefly see base models before sync  
+  The mod retries up to 10 times with short delays
+
+---
+
+## 📦 Changelog
+
+### v1.5.3
+- ✅ `UnlockImmediately` now syncs properly for Trash Cans  
+- 🏷️ Main Il2Cpp branch renamed to `UpgradedTrashCans_Il2Cpp.dll`
+
+### v1.5.2 to v1.0 (Highlights)
+- Multiplayer sync, injection refactor, ModManager support
+- Trash Grabber Pro and two trash can variants added
+- Initial single-item prototype
+
+---
+
+## 💾 Installation
+
+1. Install MelonLoader for *Schedule I*  
+2. Drop `UpgradedTrashCans.dll` into the `Mods/` folder  
+3. Launch the game — upgrades will appear in the Hardware Store
 
 ---
 
 ## 🐞 Bug Reporting
 
-If you encounter a bug, please help by enabling debug logging:
-
-- Open the **Mod Manager Phone App** and locate UpgradedTrashCan config
-- Scroll to the bottom and locate the **Enable Debug Logging** toggle
-- Turn it on and reproduce the issue
-- Logs will be written to the MelonLoader console/logs folder
-
-You can submit bugs with logs attached via NexusMods.
+1. Open the Mod Manager Phone App → UpgradedTrashCan settings  
+2. Scroll to the bottom and enable **Debug Logging**  
+3. Reproduce the issue  
+4. Logs are saved to the MelonLoader `Logs/` folder  
+5. Submit reports via [GitHub](https://github.com/j0ckinjz/UpgradedTrashCans) or NexusMods
 
 ---
 
 ## 🧪 Notes
-- Settings are applied automatically on scene load
-- If joining a multiplayer session, client settings will be overridden by the host
-- The mod uses `LobbyData` for robust cross-player sync
+
+- Items persist across save/load  
+- Custom tints apply even when shelved  
+- Uses original prefabs — no additional assets required
 
 ---
-© 2024 j0ckinjz. Licensed under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+## 📁 Source Code & Releases
+
+- 💻 GitHub: [j0ckinjz/UpgradedTrashCans](https://github.com/j0ckinjz/UpgradedTrashCans)
+- 📦 Thunderstore: [j0ckinjz on Thunderstore](https://thunderstore.io/c/schedule-i/p/j0ckinjz/)
+- 📥 NexusMods: [Upgraded Trash Cans on NexusMods](https://www.nexusmods.com/schedule1/mods/928)
+
+📜 Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)  
+🛠 Mod by **j0ckinjz**
+
+---
+
+## 📝 Author’s Note
+
+The goal of this mod was to add meaningful, progression-based upgrades to trash handling in *Schedule I*. Each variant has balanced stats with optional customization via Mod Manager.
+
+> This mod is not a cheat — it’s designed to give players more flexibility while preserving game balance.
