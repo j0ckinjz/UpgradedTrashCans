@@ -1,6 +1,6 @@
 # 📦 Upgraded Trash Cans — Smarter Waste Management for *Schedule I*
 
-> **Main Il2Cpp Branch** & **Mono/Alternative Branch** releases availible!
+> **Main Il2Cpp Branch** & **Mono/Alternative Branch** releases available!
 
 This mod enhances trash-related gameplay by adding **two new trash can upgrades** and a **pro-level grabber** to the Hardware Store — all customizable and fully multiplayer compatible.
 
