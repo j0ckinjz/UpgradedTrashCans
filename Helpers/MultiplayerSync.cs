@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System;
-using Il2CppScheduleOne.Levelling;
+﻿using Il2CppScheduleOne.Levelling;
 using MelonLoader;
 using UnityEngine;
 using Il2CppScheduleOne.Networking;
@@ -15,7 +13,6 @@ namespace UpgradedTrashCans
         private const string LobbyTagPrefix = "UpgradedTrashCans_Settings:";
         private static readonly string CurrentSyncVersion = typeof(Core).Assembly.GetName().Version.ToString();
         public static bool HasReceivedHostVariants { get; private set; } = false;
-
 
         public static void SyncSettingsToVariants()
         {

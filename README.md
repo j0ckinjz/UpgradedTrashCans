@@ -1,6 +1,6 @@
 # 📦 Upgraded Trash Cans — Smarter Waste Management for *Schedule I*
 
-> **Main Il2Cpp Branch** — Now supports Mono via alternate build!
+> **Main Il2Cpp Branch** & **Mono/Alternative Branch** releases availible!
 
 This mod enhances trash-related gameplay by adding **two new trash can upgrades** and a **pro-level grabber** to the Hardware Store — all customizable and fully multiplayer compatible.
 
@@ -54,7 +54,7 @@ Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReferen
 
 ---
 
-## 🧑‍🤝‍🧑 Compatibility Matrix
+### 🧑‍🤝‍🧑 Compatibility Matrix
 
 | Host | Client | Result |
 |------|--------|--------|
@@ -74,14 +74,14 @@ Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReferen
 
 ## 📦 Changelog
 
-### v1.5.3
-- ✅ `UnlockImmediately` now syncs properly for Trash Cans  
-- 🏷️ Main Il2Cpp branch renamed to `UpgradedTrashCans_Il2Cpp.dll`
+### v1.5.4
+- 🔔 **Updates Checker Support**: Added metadata compatibility with `Updates Checker`
+  → Mod version can now be tracked automatically.
+- 🧹 **Code Cleanup & Null Safety**: Improved internal stability with better null checks and safer initialization handling.
+- ⚙️ **Early Settings Initialization**: Moved ModManager Preferences to initialize earlier.
 
-### v1.5.2 to v1.0 (Highlights)
-- Multiplayer sync, injection refactor, ModManager support
-- Trash Grabber Pro and two trash can variants added
-- Initial single-item prototype
+### v1.5.3 to v1.0
+- Available on [GitHub](https://github.com/j0ckinjz/UpgradedTrashCans/blob/main/CHANGELOG.md)
 
 ---
 
@@ -117,7 +117,7 @@ Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReferen
 - 📦 Thunderstore: [j0ckinjz on Thunderstore](https://thunderstore.io/c/schedule-i/p/j0ckinjz/)
 - 📥 NexusMods: [Upgraded Trash Cans on NexusMods](https://www.nexusmods.com/schedule1/mods/928)
 
-📜 Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)  
+📜 Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 🛠 Mod by **j0ckinjz**
 
 ---

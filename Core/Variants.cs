@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.Levelling;
 using Il2CppScheduleOne.ObjectScripts.WateringCan;
@@ -37,7 +36,7 @@ namespace UpgradedTrashCans
                 Name = "Trash Bin",
                 ID = "trash_bin",
                 Description = "A slightly larger trash bin.",
-                Price = 300f,
+                Price = 250f,
                 Capacity = 40,
                 Color = Color.green,
                 Radius = 5f,
@@ -84,7 +83,7 @@ namespace UpgradedTrashCans
                 Name = "Trash Grabber Pro",
                 ID = "trash_grabber_pro",
                 Description = "An advanced trash grabber with increased capacity.",
-                Price = 800f,
+                Price = 750f,
                 Color = Color.green,
                 RequiredRank = ERank.Hustler,
                 Tier = 5,

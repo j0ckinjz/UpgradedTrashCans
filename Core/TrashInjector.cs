@@ -1,10 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.Levelling;
 using Il2CppScheduleOne.UI.Shop;
-using UnityEngine;
 using Il2CppScheduleOne.ObjectScripts.WateringCan;
 using Il2CppScheduleOne.Networking;
 
@@ -23,21 +20,59 @@ namespace UpgradedTrashCans
             // Find shop interfaces in the scene by name
             var hardwareStores = new List<ShopInterface>();
 
-            foreach (var shop in ShopInterface.AllShops)
+            try
             {
-                if (shop.name == "HardwareStoreInterface" || shop.name == "HardwareStoreInterface (North Store)")
-                    hardwareStores.Add(shop);
+                foreach (var shop in ShopInterface.AllShops)
+                {
+                    if (IsValidHardwareStore(shop))
+                        hardwareStores.Add(shop);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warn($"[TrashInjector] Failed to access ShopInterface.AllShops — using fallback");
+
+                // Fallback: search entire scene
+                foreach (var shop in UnityEngine.Object.FindObjectsOfType<ShopInterface>())
+                {
+                    if (IsValidHardwareStore(shop))
+                        hardwareStores.Add(shop);
+                }
             }
 
             if (hardwareStores.Count == 0)
+            {
+                Log.Warn("[TrashInjector] No hardware store interfaces found.");
                 yield break;
+            }
 
             // Use first store as base to clone item definitions
             var baseStore = hardwareStores[0];
-            var baseListings = baseStore.Listings.ToArray(); // Make LINQ-friendly copy
+            var baseListings = baseStore?.Listings?.ToArray() ?? Array.Empty<ShopListing>();
 
-            var baseTrashCan = baseListings.FirstOrDefault(l => l.Item?.name == "TrashCan");
-            var baseGrabber = baseListings.FirstOrDefault(l => l.Item?.name == "TrashGrabber");
+            var baseTrashCan = baseListings.FirstOrDefault(l =>
+            {
+                try
+                {
+                    return !IsUnityNull(l.Item) && l.Item.name == "TrashCan";
+                }
+                catch
+                {
+                    return false;
+                }
+            });
+
+            var baseGrabber = baseListings.FirstOrDefault(l =>
+            {
+                try
+                {
+                    return !IsUnityNull(l.Item) && l.Item.name == "TrashGrabber";
+                }
+                catch
+                {
+                    return false;
+                }
+            });
 
             // Inject Trash Can variants
             if (baseTrashCan != null)
@@ -62,36 +97,87 @@ namespace UpgradedTrashCans
             {
                 foreach (var variant in TrashCanVariants.All)
                 {
-                    shop.Listings.Add(new ShopListing
+                    if (variant?.Definition == null)
                     {
-                        Item = variant.Definition,
-                        name = variant.Name,
-                        OverridePrice = true,
-                        OverriddenPrice = variant.Price,
-                        CurrentStock = 999
-                    });
-                    shop.CreateListingUI(shop.Listings[^1]);
-                    Log.Debug($"Injected {variant.Name} with ID {variant.ID} into shop.");
+                        Log.Warn($"Skipped injecting trash can variant {variant?.Name} due to missing definition.");
+                        continue;
+                    }
+
+                    try
+                    {
+                        var listing = new ShopListing
+                        {
+                            Item = variant.Definition,
+                            name = variant.Name,
+                            OverridePrice = true,
+                            OverriddenPrice = variant.Price,
+                            CurrentStock = 999
+                        };
+
+                        shop.Listings.Add(listing);
+                        shop.CreateListingUI(listing);
+                        Log.Debug($"Injected {variant.Name} with ID {variant.ID} into shop.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Failed to inject trash can variant {variant.Name}: {ex.Message}");
+                    }
                 }
 
                 foreach (var variant in TrashGrabberVariants.All)
                 {
-                    shop.Listings.Add(new ShopListing
+                    if (variant?.Definition == null)
                     {
-                        Item = variant.Definition,
-                        name = variant.Name,
-                        OverridePrice = true,
-                        OverriddenPrice = variant.Price,
-                        CurrentStock = 999
-                    });
-                    shop.CreateListingUI(shop.Listings[^1]);
-                    Log.Debug($"Injected {variant.Name} with ID {variant.ID} into shop.");
+                        Log.Warn($"Skipped injecting trash grabber variant {variant?.Name} due to missing definition.");
+                        continue;
+                    }
+
+                    try
+                    {
+                        var listing = new ShopListing
+                        {
+                            Item = variant.Definition,
+                            name = variant.Name,
+                            OverridePrice = true,
+                            OverriddenPrice = variant.Price,
+                            CurrentStock = 999
+                        };
+
+                        shop.Listings.Add(listing);
+                        shop.CreateListingUI(listing);
+                        Log.Debug($"Injected {variant.Name} with ID {variant.ID} into shop.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Failed to inject trash grabber variant {variant.Name}: {ex.Message}");
+                    }
                 }
             }
 
             Log.Msg("Upgraded items injected successfully into all Hardware Stores!");
             yield break;
         }
+
+        private static bool IsValidHardwareStore(ShopInterface shop)
+        {
+            if (shop == null || shop.Listings == null || shop.Listings.Count == 0)
+                return false;
+
+            try
+            {
+                return shop.name == "HardwareStoreInterface" || shop.name == "HardwareStoreInterface (North Store)";
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static bool IsUnityNull(UnityEngine.Object obj)
+        {
+            return obj == null || obj.Equals(null);
+        }
+
 
         private static void InjectCustomTrashCan(ShopInterface shop, ShopListing baseListing, Variants variant)
         {
@@ -103,7 +189,7 @@ namespace UpgradedTrashCans
             }
 
             // Clone the definition only — reuse the prefab
-            var def = Object.Instantiate(baseDef);
+            var def = UnityEngine.Object.Instantiate(baseDef);
             def.Name = variant.Name;
             def.ID = variant.ID;
             def.Description = variant.Description;
@@ -140,7 +226,7 @@ namespace UpgradedTrashCans
                 return;
             }
 
-            var def = Object.Instantiate(baseDef);
+            var def = UnityEngine.Object.Instantiate(baseDef);
             def.ID = variant.ID;
             def.Name = variant.Name;
             def.name = variant.Name.Replace(" ", "");

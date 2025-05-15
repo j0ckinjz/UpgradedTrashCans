@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Il2CppScheduleOne.Equipping;
 using Il2CppScheduleOne.ObjectScripts;
 using UnityEngine;

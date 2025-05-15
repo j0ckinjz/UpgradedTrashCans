@@ -37,6 +37,7 @@ namespace UpgradedTrashCans
         public static MelonPreferences_Entry<float> Grabber_Price;
         public static MelonPreferences_Entry<string> Grabber_CustomRGB;
         public static MelonPreferences_Entry<bool> DebugLogs;
+
         public static void InitializeSettings()
         {
             TrashBinSettings = CreateGroup("01_TrashBin", "Upgraded Trash Bin", ColorOption.Green, ExtendedColorOption.Lime, 40, 5f, RankOption.Hoodlum, 1, false, 250f);

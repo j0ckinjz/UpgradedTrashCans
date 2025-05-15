@@ -1,5 +1,11 @@
 # 📦 Upgraded Trash Cans — Changelog
 
+## v1.5.4
+- 🔔 **Updates Checker Support**: Added metadata compatibility with `Updates Checker`
+  → Mod version can now be tracked automatically.
+- 🧹 **Code Cleanup & Null Safety**: Improved internal stability with better null checks and safer initialization handling.
+- ⚙️ **Early Settings Initialization**: Moved ModManager Preferences to initialize earlier.
+
 ## v1.5.3
 - ✅ **Bugfix**: `UnlockImmediately` flag now syncs correctly for Trash Can variants in multiplayer  
   → Clients will no longer see bin/compactor as unlocked if the host hasn’t allowed it

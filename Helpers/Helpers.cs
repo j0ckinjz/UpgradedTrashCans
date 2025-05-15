@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Linq;
-using System.Collections.Generic;
 using Il2CppScheduleOne;
 using Il2CppScheduleOne.ItemFramework;
 
@@ -136,7 +134,7 @@ namespace UpgradedTrashCans
     }
     public static class DefinitionTracker
     {
-        private static readonly List<Object> TrackedDefinitions = new();
+        private static readonly List<UnityEngine.Object> TrackedDefinitions = new();
         private static readonly List<GameObject> TrackedGameObjects = new();
         private static readonly Dictionary<GameObject, BuildableItemDefinition> GameObjectToDefinitionMap = new();
 
@@ -194,7 +192,7 @@ namespace UpgradedTrashCans
             foreach (var go in TrackedGameObjects)
             {
                 if (go != null)
-                    Object.Destroy(go);
+                    UnityEngine.Object.Destroy(go);
             }
             TrackedGameObjects.Clear();
             GameObjectToDefinitionMap.Clear();
@@ -202,5 +200,4 @@ namespace UpgradedTrashCans
             Log.Msg("Cleared all tracked definitions and GameObjects.");
         }
     }
-
 }

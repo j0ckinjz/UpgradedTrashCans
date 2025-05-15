@@ -2,87 +2,93 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<OutputType>Library</OutputType>
-		<LangVersion>latest</LangVersion>
-		<AssemblyName>UpgradedTrashCans</AssemblyName>
-		<ImplicitUsings>disable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<NoWarn>$(NoWarn);CS8618</NoWarn>
+		<LangVersion>10.0</LangVersion>
+		<RootNamespace>UpgradedTrashCans</RootNamespace>
+		<AssemblyName>UpgradedTrashCans_Il2Cpp</AssemblyName>
+		<AssemblyVersion>1.5.4</AssemblyVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
 		<PlatformTarget>x64</PlatformTarget>
 		<Platforms>x64</Platforms>
-		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 		<RunPostBuildEvent>Always</RunPostBuildEvent>
+		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="Core\TrashTag.cs" />
-	</ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <DebugType>none</DebugType>
+	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
-		  <HintPath>Libs\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="MelonLoader">
-			<HintPath>Libs\MelonLoader.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Il2CppInterop.Runtime">
-			<HintPath>Libs\Il2CppInterop.Runtime.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Unity.RenderPipelines.Universal.Runtime">
-		  <HintPath>Libs\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine.AnimationModule">
-		  <HintPath>Libs\UnityEngine.AnimationModule.dll</HintPath>
+		<!-- Core Engine -->
+		<Reference Include="UnityEngine">
+			<HintPath>..\Libs\UnityEngine.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine">
-			<HintPath>Libs\UnityEngine.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine.JSONSerializeModule">
-		  <HintPath>Libs\UnityEngine.JSONSerializeModule.dll</HintPath>
+			<HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="UnityEngine.UI">
-			<HintPath>Libs\UnityEngine.UI.dll</HintPath>
+			<HintPath>..\Libs\UnityEngine.UI.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2Cppmscorlib">
-			<HintPath>Libs\Il2Cppmscorlib.dll</HintPath>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>..\Libs\UnityEngine.AnimationModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2Cppsystem">
-			<HintPath>Libs\Il2Cppsystem.dll</HintPath>
+		<Reference Include="UnityEngine.JSONSerializeModule">
+			<HintPath>..\Libs\UnityEngine.JSONSerializeModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2Cppsystem.Core">
-			<HintPath>Libs\Il2Cppsystem.Core.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>Libs\Assembly-CSharp.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Il2CppFishNet.Runtime">
-			<HintPath>Libs\Il2CppFishNet.Runtime.dll</HintPath>
+		<Reference Include="Unity.RenderPipelines.Universal.Runtime">
+			<HintPath>..\Libs\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="Unity.TextMeshPro">
-			<HintPath>Libs\Unity.TextMeshPro.dll</HintPath>
+			<HintPath>..\Libs\Unity.TextMeshPro.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="UnityEngine.ImageConversionModule">
-			<HintPath>Libs\UnityEngine.ImageConversionModule.dll</HintPath>
+			<HintPath>..\Libs\UnityEngine.ImageConversionModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<!-- Il2Cpp Core -->
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>..\Libs\Il2Cppmscorlib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppsystem">
+			<HintPath>..\Libs\Il2Cppsystem.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppsystem.Core">
+			<HintPath>..\Libs\Il2Cppsystem.Core.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppFishNet.Runtime">
+			<HintPath>..\Libs\Il2CppFishNet.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
+			<HintPath>..\Libs\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<!-- Mod Loader -->
+		<Reference Include="MelonLoader">
+			<HintPath>..\Libs\MelonLoader.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="0Harmony">
-			<HintPath>Libs\0Harmony.dll</HintPath>
+			<HintPath>..\Libs\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppInterop.Runtime">
+			<HintPath>..\Libs\Il2CppInterop.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<!-- Game Assemblies -->
+		<Reference Include="Assembly-CSharp">
+			<HintPath>..\Libs\Assembly-CSharp.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 	</ItemGroup>
