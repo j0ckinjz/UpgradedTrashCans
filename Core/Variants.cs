@@ -86,7 +86,7 @@ namespace UpgradedTrashCans
                 Price = 750f,
                 Color = Color.green,
                 RequiredRank = ERank.Hustler,
-                Tier = 5,
+                Tier = 1,
                 UnlockImmediately = false,
                 Capacity = 50
             }
