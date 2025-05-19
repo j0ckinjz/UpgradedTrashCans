@@ -1,5 +1,9 @@
-﻿using Il2CppScheduleOne.Levelling;
-using MelonLoader;
+﻿using MelonLoader;
+#if IL2CPP
+using Il2CppScheduleOne.Levelling;
+#elif MONO
+using ScheduleOne.Levelling;
+#endif
 
 namespace UpgradedTrashCans
 {

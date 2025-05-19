@@ -1,7 +1,13 @@
+using UnityEngine;
+#if IL2CPP
 using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.Levelling;
 using Il2CppScheduleOne.ObjectScripts.WateringCan;
-using UnityEngine;
+#elif MONO
+using ScheduleOne.ItemFramework;
+using ScheduleOne.Levelling;
+using ScheduleOne.ObjectScripts.WateringCan;
+#endif
 
 namespace UpgradedTrashCans
 {
@@ -27,6 +33,8 @@ namespace UpgradedTrashCans
         public TrashCanType Type;
     }
 
+    // These defaults act as a fallback if ModManager settings or multiplayer sync are unavailable.
+    // Final values are usually applied at runtime via ModManager.ApplyTo() or VariantSyncManager.
     public static class TrashCanVariants
     {
         public static List<Variants> All = new()
@@ -84,7 +92,7 @@ namespace UpgradedTrashCans
                 ID = "trash_grabber_pro",
                 Description = "An advanced trash grabber with increased capacity.",
                 Price = 750f,
-                Color = Color.green,
+                Color = Color.cyan,
                 RequiredRank = ERank.Hustler,
                 Tier = 1,
                 UnlockImmediately = false,

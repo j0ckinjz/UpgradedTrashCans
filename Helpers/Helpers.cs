@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
+#if IL2CPP
 using Il2CppScheduleOne;
 using Il2CppScheduleOne.ItemFramework;
+#elif MONO
+using ScheduleOne;
+using ScheduleOne.ItemFramework;
+#endif
 
 namespace UpgradedTrashCans
 {
@@ -36,6 +41,7 @@ namespace UpgradedTrashCans
                 _ => Color.white
             };
         }
+
         public static bool TryParseRGB(string input, out Color color)
         {
             color = Color.white;
@@ -64,7 +70,8 @@ namespace UpgradedTrashCans
             Log.Warn($"Failed to parse float values from RGB string: \"{input}\"");
             return false;
         }
-    }    
+    }
+
     public static class SpriteLoader
     {
         public static Sprite TintSprite(Sprite original, Color tint, string name = null)
@@ -119,6 +126,7 @@ namespace UpgradedTrashCans
             return readable;
         }
     }
+
     internal static class VisualHelper
     {       
         public static void TintRenderers(Transform root, Color color, params string[] targetNames)
@@ -132,11 +140,10 @@ namespace UpgradedTrashCans
                 renderer.material.color = color;
         }
     }
+
     public static class DefinitionTracker
     {
-        private static readonly List<UnityEngine.Object> TrackedDefinitions = new();
-        private static readonly List<GameObject> TrackedGameObjects = new();
-        private static readonly Dictionary<GameObject, BuildableItemDefinition> GameObjectToDefinitionMap = new();
+        private static readonly List<ItemDefinition> TrackedDefinitions = new();
 
         public static void TrackDefinition(ItemDefinition def)
         {
@@ -144,60 +151,25 @@ namespace UpgradedTrashCans
 
             Registry.Instance.AddToRegistry(def);
             Registry.Instance.AddToItemDictionary(new Registry.ItemRegister { ID = def.ID, Definition = def });
+
             Log.Debug($"Tracking definition: {def.ID}");
             TrackedDefinitions.Add(def);
         }
 
-        public static void TrackGameObject(GameObject go)
-        {
-            if (go != null && !TrackedGameObjects.Contains(go))
-                TrackedGameObjects.Add(go);
-        }
-
-        public static void TrackGameObject(GameObject go, BuildableItemDefinition def)
-        {
-            if (go == null || def == null)
-                return;
-
-            TrackGameObject(go);
-
-            if (!GameObjectToDefinitionMap.ContainsKey(go))
-                GameObjectToDefinitionMap.Add(go, def);
-        }
-
-        public static bool IsTrackedGameObject(GameObject go, BuildableItemDefinition def)
-        {
-            return go != null && def != null &&
-                   GameObjectToDefinitionMap.TryGetValue(go, out var tracked) &&
-                   tracked == def;
-        }
-
         public static void ClearAll()
         {
-            foreach (var obj in TrackedDefinitions)
+            foreach (var def in TrackedDefinitions)
             {
-                var def = obj.TryCast<ItemDefinition>();
-                if (def != null)
+                Registry.Instance.RemoveFromRegistry(def);
+                Registry.Instance.RemoveItemFromDictionary(new Registry.ItemRegister
                 {
-                    Registry.Instance.RemoveFromRegistry(def);
-                    Registry.Instance.RemoveItemFromDictionary(new Registry.ItemRegister
-                    {
-                        ID = def.ID,
-                        Definition = def
-                    });
-                }
+                    ID = def.ID,
+                    Definition = def
+                });
             }
+
             TrackedDefinitions.Clear();
-
-            foreach (var go in TrackedGameObjects)
-            {
-                if (go != null)
-                    UnityEngine.Object.Destroy(go);
-            }
-            TrackedGameObjects.Clear();
-            GameObjectToDefinitionMap.Clear();
-
-            Log.Msg("Cleared all tracked definitions and GameObjects.");
+            Log.Msg("Cleared all tracked definitions.");
         }
     }
 }

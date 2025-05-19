@@ -1,99 +1,1256 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<OutputType>Library</OutputType>
-		<LangVersion>10.0</LangVersion>
-		<RootNamespace>UpgradedTrashCans</RootNamespace>
-		<AssemblyName>UpgradedTrashCans_Il2Cpp</AssemblyName>
-		<AssemblyVersion>1.5.4</AssemblyVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<PlatformTarget>x64</PlatformTarget>
-		<Platforms>x64</Platforms>
-		<RunPostBuildEvent>Always</RunPostBuildEvent>
-		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-	  <DebugType>none</DebugType>
+		<RootNamespace>UpgradedTrashCans</RootNamespace> <!--Change this-->
+		<LangVersion>default</LangVersion>
+		<IsPackable>false</IsPackable>
+		<AssemblyVersion>1.6.0</AssemblyVersion>
+		<FileVersion>1.6.0</FileVersion>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Configurations>MONO;IL2CPP</Configurations>
+		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<!-- Core Engine -->
-		<Reference Include="UnityEngine">
-			<HintPath>..\Libs\UnityEngine.dll</HintPath>
+	<PropertyGroup Condition="'$(Configuration)' == 'MONO'">
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>UpgradedTrashCans_Mono</AssemblyName> <!--Change this-->
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'IL2CPP'">
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>UpgradedTrashCans_IL2Cpp</AssemblyName> <!--Change this-->
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'MONO'">
+		<S1Dir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I_Mono</S1Dir> <!--Change this-->
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'IL2CPP'">
+		<S1Dir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I</S1Dir> <!--Change this-->
+	</PropertyGroup>
+
+
+	<ItemGroup Condition="'$(Configuration)' == 'MONO'">
+		<Reference Include="AeLa.EasyFeedback.Demo">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\AeLa.EasyFeedback.Demo.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
+		<Reference Include="AeLa.EasyFeedback">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\AeLa.EasyFeedback.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="UnityEngine.UI">
-			<HintPath>..\Libs\UnityEngine.UI.dll</HintPath>
+		<Reference Include="AeLa.EasyFeedback.InputSystemSupport">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\AeLa.EasyFeedback.InputSystemSupport.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="UnityEngine.AnimationModule">
-			<HintPath>..\Libs\UnityEngine.AnimationModule.dll</HintPath>
+		<Reference Include="AmplifyImpostors">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\AmplifyImpostors.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="UnityEngine.JSONSerializeModule">
-			<HintPath>..\Libs\UnityEngine.JSONSerializeModule.dll</HintPath>
+		<Reference Include="AmplifyImpostors.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\AmplifyImpostors.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="AstarPathfindingProject">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\AstarPathfindingProject.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Autodesk.Fbx">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Autodesk.Fbx.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Boxophobic.AtmosphericHeightFog.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Boxophobic.AtmosphericHeightFog.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Boxophobic.Utils.Scripts">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Boxophobic.Utils.Scripts.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Cinemachine">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Cinemachine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="com.rlabrecque.steamworks.net">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="CorgiGodRays">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\CorgiGodRays.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="EasyButtons">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\EasyButtons.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="FbxBuildTestAssets">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\FbxBuildTestAssets.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="FishNet.CodeAnalysis">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\FishNet.CodeAnalysis.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="FishNet.Demos">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\FishNet.Demos.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="FishNet.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\FishNet.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="GameKit.Dependencies">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\GameKit.Dependencies.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="GameKit.Utilities">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\GameKit.Utilities.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="HBAO.Demo.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\HBAO.Demo.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="HBAO.Demo.Universal.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\HBAO.Demo.Universal.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="HBAO.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\HBAO.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="HBAO.Universal.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\HBAO.Universal.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="HSVPicker">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\HSVPicker.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="LokoSolo.PinchableScrollRect">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\LokoSolo.PinchableScrollRect.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Newtonsoft.Json.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Pathfinding.ClipperLib">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Pathfinding.ClipperLib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Pathfinding.Ionic.Zip.Reduced">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Pathfinding.Poly2Tri">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Pathfinding.Poly2Tri.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="RadiantGI">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\RadiantGI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="RootMotion">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\RootMotion.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="RuntimePreviewGenerator.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\RuntimePreviewGenerator.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="sc.stylizedgrass.runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\sc.stylizedgrass.runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="sc.stylizedwater2.runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\sc.stylizedwater2.runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="StylizedWaterForURP">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\StylizedWaterForURP.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.AI.Navigation">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.AI.Navigation.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Burst">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Burst.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Burst.Unsafe">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Burst.Unsafe.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Collections">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Collections.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Collections.LowLevel.ILSupport">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Formats.Fbx.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Formats.Fbx.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.InputSystem">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.InputSystem.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.InputSystem.ForUI">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.InputSystem.ForUI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.InputSystem.RebindingUI">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.InputSystem.RebindingUI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Mathematics">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Mathematics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.MemoryProfiler">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.MemoryProfiler.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Postprocessing.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.ProGrids">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.ProGrids.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Core.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="Unity.RenderPipelines.Universal.Runtime">
-			<HintPath>..\Libs\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Universal.Shaders">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Analytics">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Analytics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.CloudDiagnostics">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.CloudDiagnostics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Analytics">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Analytics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Configuration">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Configuration.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Device">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Device.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Environments">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Environments.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Environments.Internal">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Environments.Internal.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Internal">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Internal.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Networking">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Networking.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Registration">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Registration.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Scheduler">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Scheduler.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Telemetry">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Telemetry.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Threading">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Services.Core.Threading.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.TerrainTools">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.TerrainTools.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="Unity.TextMeshPro">
-			<HintPath>..\Libs\Unity.TextMeshPro.dll</HintPath>
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Timeline">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\Unity.Timeline.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AccessibilityModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.AccessibilityModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AIModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.AIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AndroidJNIModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.AndroidJNIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ARModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ARModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ClothModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ClothModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ClusterInputModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ClusterRendererModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ClusterRendererModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ContentLoadModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ContentLoadModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.DirectorModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.DirectorModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.DSPGraphModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.DSPGraphModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.GameCenterModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.GameCenterModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.GIModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.GIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.GridModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.GridModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.HotReloadModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.HotReloadModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="UnityEngine.ImageConversionModule">
-			<HintPath>..\Libs\UnityEngine.ImageConversionModule.dll</HintPath>
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<!-- Il2Cpp Core -->
-		<Reference Include="Il2Cppmscorlib">
-			<HintPath>..\Libs\Il2Cppmscorlib.dll</HintPath>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2Cppsystem">
-			<HintPath>..\Libs\Il2Cppsystem.dll</HintPath>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2Cppsystem.Core">
-			<HintPath>..\Libs\Il2Cppsystem.Core.dll</HintPath>
+		<Reference Include="UnityEngine.InputModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.InputModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2CppFishNet.Runtime">
-			<HintPath>..\Libs\Il2CppFishNet.Runtime.dll</HintPath>
+		<Reference Include="UnityEngine.JSONSerializeModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
-			<HintPath>..\Libs\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
+		<Reference Include="UnityEngine.LocalizationModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.LocalizationModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<!-- Mod Loader -->
+		<Reference Include="UnityEngine.NVIDIAModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.NVIDIAModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ParticleSystemModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.PerformanceReportingModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.PerformanceReportingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.Physics2DModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.PhysicsModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ProfilerModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ProfilerModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.PropertiesModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.PropertiesModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ScreenCaptureModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SharedInternalsModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteMaskModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteShapeModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.StreamingModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.StreamingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SubstanceModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.SubstanceModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SubsystemsModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.SubsystemsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TerrainModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainPhysicsModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreFontEngineModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreTextEngineModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TextRenderingModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TilemapModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TilemapModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TLSModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.TLSModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UmbraModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UmbraModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityConnectModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityConnectModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityCurlModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityCurlModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityTestProtocolModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAudioModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestWWWModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VehiclesModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.VehiclesModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VFXModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.VFXModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VideoModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.VideoModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VirtualTexturingModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.VirtualTexturingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VRModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.VRModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.WindModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.WindModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.XRModule">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\UnityEngine.XRModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VisualDesignCafe.Nature">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\VisualDesignCafe.Nature.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VisualDesignCafe.Packages">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\VisualDesignCafe.Packages.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VisualDesignCafe.ShaderX">
+			<HintPath>$(S1Dir)\Schedule I_Data\Managed\VisualDesignCafe.ShaderX.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 		<Reference Include="MelonLoader">
-			<HintPath>..\Libs\MelonLoader.dll</HintPath>
+			<HintPath>$(S1Dir)\MelonLoader\net35\MelonLoader.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="0Harmony">
-			<HintPath>..\Libs\0Harmony.dll</HintPath>
+			<HintPath>$(S1Dir)\MelonLoader\net35\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'IL2CPP'">
+		<Reference Include="UnityEngine.Il2CppAssetBundleManager">
+			<HintPath>Libs\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp-firstpass.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppAeLa.EasyFeedback">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppAeLa.EasyFeedback.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppAeLa.EasyFeedback.InputSystemSupport">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppAeLa.EasyFeedback.InputSystemSupport.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppAmplifyImpostors">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppAmplifyImpostors.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppAmplifyImpostors.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppAmplifyImpostors.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppAstarPathfindingProject">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppAstarPathfindingProject.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppBoxophobic.AtmosphericHeightFog.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppBoxophobic.AtmosphericHeightFog.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppBoxophobic.Utils.Scripts">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppBoxophobic.Utils.Scripts.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppCinemachine">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppCinemachine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppCorgiGodRays">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppCorgiGodRays.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppEasyButtons">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppEasyButtons.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppEdgegap">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppEdgegap.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppFishNet.Demos">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppFishNet.Demos.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppFishNet.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppFishNet.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppGameKit.Dependencies">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppGameKit.Dependencies.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppGameKit.Utilities">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppGameKit.Utilities.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppHBAO.Demo.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Demo.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppHBAO.Demo.Universal.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Demo.Universal.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppHBAO.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppHBAO.Universal.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppHBAO.Universal.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppHSVPicker">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppHSVPicker.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppLokoSolo.PinchableScrollRect">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppLokoSolo.PinchableScrollRect.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppMono.Security">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppMono.Security.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppNewtonsoft.Json">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppNewtonsoft.Json.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppPathfinding.ClipperLib">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppPathfinding.ClipperLib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppPathfinding.Ionic.Zip.Reduced">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppPathfinding.Ionic.Zip.Reduced.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppPathfinding.Poly2Tri">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppPathfinding.Poly2Tri.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppRadiantGI">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppRadiantGI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppRootMotion">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppRootMotion.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppRuntimePreviewGenerator.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppRuntimePreviewGenerator.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppsc.stylizedgrass.runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2Cppsc.stylizedgrass.runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cppsc.stylizedwater2.runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2Cppsc.stylizedwater2.runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppStylizedWaterForURP">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppStylizedWaterForURP.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Configuration">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Configuration.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Core">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Core.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Data">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Data.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Drawing">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Drawing.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.IO.Compression">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.IO.Compression.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.IO.Compression.FileSystem">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.IO.Compression.FileSystem.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Net.Http">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Net.Http.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Numerics">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Numerics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Runtime.Serialization">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Xml">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem.Xml.Linq">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.Linq.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppVisualDesignCafe.Nature">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppVisualDesignCafe.Nature.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppVisualDesignCafe.Packages">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppVisualDesignCafe.Packages.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2CppVisualDesignCafe.ShaderX">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppVisualDesignCafe.ShaderX.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Il2Cpp__Generated">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2Cpp__Generated.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.AI.Navigation">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.AI.Navigation.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Burst">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Burst.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Burst.Unsafe">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Burst.Unsafe.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Collections">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Collections.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Collections.LowLevel.ILSupport">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.InputSystem">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.InputSystem.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.InputSystem.ForUI">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.InputSystem.RebindingUI">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.InputSystem.RebindingUI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Mathematics">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Mathematics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Postprocessing.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Core.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.RenderPipelines.Universal.Runtime">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Analytics">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Analytics.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Configuration">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Configuration.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Device">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Device.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Environments.Internal">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Environments.Internal.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Internal">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Internal.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Registration">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Registration.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Scheduler">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Scheduler.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Telemetry">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Telemetry.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Services.Core.Threading">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Services.Core.Threading.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Unity.Timeline">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Unity.Timeline.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AccessibilityModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.AccessibilityModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AIModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.AIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AndroidJNIModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.AndroidJNIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.AnimationModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ARModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ARModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.AssetBundleModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ClothModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ClothModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ContentLoadModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ContentLoadModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.CrashReportingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.DirectorModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.DirectorModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.DSPGraphModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.DSPGraphModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.GameCenterModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.GameCenterModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.GIModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.GIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.GridModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.GridModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.HotReloadModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.HotReloadModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.InputModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.JSONSerializeModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.JSONSerializeModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.LocalizationModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.LocalizationModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ParticleSystemModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ParticleSystemModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.PerformanceReportingModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.PerformanceReportingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.Physics2DModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.Physics2DModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.PhysicsModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.PhysicsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ProfilerModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ProfilerModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.PropertiesModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.PropertiesModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ScreenCaptureModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.ScreenCaptureModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SharedInternalsModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.SharedInternalsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteMaskModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteMaskModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteShapeModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteShapeModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.StreamingModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.StreamingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SubstanceModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.SubstanceModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.SubsystemsModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.SubsystemsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainPhysicsModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreFontEngineModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreTextEngineModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TextRenderingModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TextRenderingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TilemapModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TilemapModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.TLSModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.TLSModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UIElementsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UmbraModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UmbraModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityConnectModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityConnectModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityCurlModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityCurlModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityTestProtocolModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAudioModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestWWWModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VehiclesModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.VehiclesModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VFXModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.VFXModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VideoModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.VideoModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.VRModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.VRModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.WindModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.WindModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.XRModule">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\UnityEngine.XRModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="MelonLoader">
+			<HintPath>$(S1Dir)\MelonLoader\net6\MelonLoader.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="0Harmony">
+			<HintPath>$(S1Dir)\MelonLoader\net6\0Harmony.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="Il2CppInterop.Runtime">
-			<HintPath>..\Libs\Il2CppInterop.Runtime.dll</HintPath>
+			<HintPath>$(S1Dir)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<!-- Game Assemblies -->
-		<Reference Include="Assembly-CSharp">
-			<HintPath>..\Libs\Assembly-CSharp.dll</HintPath>
+		<Reference Include="Il2CppInterop.Common">
+			<HintPath>$(S1Dir)\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+
+	</ItemGroup>
+
+	<PropertyGroup>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Core.cs" />
+		<Compile Include="Core\TrashInjector.cs" />
+		<Compile Include="Core\Variants.cs" />
+		<Compile Include="Helpers\Helpers.cs" />
+		<Compile Include="Helpers\ModManager.cs" />
+		<Compile Include="Helpers\MultiplayerSync.cs" />
+		<Compile Include="Patches\Patches.cs" />
+		<!--<Compile Include="TemplateUtils\AssetBundleUtils.cs" />-->
+		<!--<Folder Include="Libs\" />-->
+		<!--<Folder Include="Assets\" />-->
+		<!--Uncomment if with assetbundle-->
+		<!--<EmbeddedResource Include="Assets\your.assetbundle" />-->
+	</ItemGroup>
+
+	<!--Packages-->
+	<ItemGroup>
+		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<!--Publicizer Entries-->
+	<ItemGroup Condition="'$(Configuration)' == 'MONO'">
+		<Publicize Include="Assembly-CSharp" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="rd &quot;$(ProjectDir)obj&quot; /s /q" />
+		<Exec Command="tasklist | findstr /I &quot;Schedule.*I.exe&quot; &gt;nul &amp;&amp; taskkill /F /IM &quot;Schedule I.exe&quot;&#xD;&#xA;COPY &quot;$(TargetPath)&quot; &quot;$(S1Dir)\Mods&quot;" />
 	</Target>
 </Project>

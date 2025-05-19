@@ -1,6 +1,6 @@
 ﻿using MelonLoader;
 
-[assembly: MelonInfo(typeof(UpgradedTrashCans.Core), "UpgradedTrashCans", "1.5.4", "j0ckinjz")]
+[assembly: MelonInfo(typeof(UpgradedTrashCans.Core), "UpgradedTrashCans", "1.6.0", "j0ckinjz")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 [assembly: System.Reflection.AssemblyMetadata("NexusModID", "928")]
 
@@ -9,7 +9,7 @@ namespace UpgradedTrashCans
     public class Core : MelonMod
     {
         public override void OnInitializeMelon()
-        {            
+        {
             ModManager.InitializeSettings();
             Log.Msg($"Mod Initialized. Version {Info.Version}");
         }
@@ -36,4 +36,3 @@ namespace UpgradedTrashCans
         }
     }
 }
-

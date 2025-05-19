@@ -1,10 +1,16 @@
-﻿using Il2CppScheduleOne.Levelling;
-using MelonLoader;
+﻿using MelonLoader;
 using UnityEngine;
-using Il2CppScheduleOne.Networking;
-using Il2CppSteamworks;
 using System.Text;
 using static UpgradedTrashCans.ModManager;
+#if IL2CPP
+using Il2CppScheduleOne.Levelling;
+using Il2CppScheduleOne.Networking;
+using Il2CppSteamworks;
+#elif MONO
+using ScheduleOne.Levelling;
+using ScheduleOne.Networking;
+using Steamworks;
+#endif
 
 namespace UpgradedTrashCans
 {
