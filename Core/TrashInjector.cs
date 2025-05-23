@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-
 #if IL2CPP
 using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.Levelling;

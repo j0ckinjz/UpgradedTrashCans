@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering.Universal;
 #if IL2CPP
 using Il2CppScheduleOne;
 using Il2CppScheduleOne.ItemFramework;
+using Il2CppScheduleOne.Trash;
 #elif MONO
 using ScheduleOne;
 using ScheduleOne.ItemFramework;
+using ScheduleOne.Trash;
 #endif
 
 namespace UpgradedTrashCans
@@ -170,6 +173,66 @@ namespace UpgradedTrashCans
 
             TrackedDefinitions.Clear();
             Log.Msg("Cleared all tracked definitions.");
+        }
+    }
+
+    public static class PreviewHelper
+    {
+        public static class State
+        {
+            public static Variants? Current;
+        }
+
+        public static void TrackPreviewVariant(ItemInstance item)
+        {
+            if (item?.Definition == null)
+            {
+                State.Current = null;
+                Log.Debug("[Preview] No definition found — cleared active variant.");
+                return;
+            }
+
+            var def = item.Definition;
+            var variant = TrashCanVariants.All.FirstOrDefault(v => v.Definition == def);
+            State.Current = variant;
+
+            Log.Debug(variant != null
+                ? $"[Preview] Spawned ghost for variant: {variant.ID}"
+                : "[Preview] Spawned ghost for base trash can or non-variant.");
+        }
+
+        public static void ApplyRadiusIfValid(DecalProjector projector)
+        {
+            if (projector == null)
+                return;
+
+            var root = projector.transform?.root;
+            var go = root?.gameObject;
+
+            if (go == null)
+                return;
+
+            // Must contain a trash container
+            var container = root.GetComponentInChildren<TrashContainer>();
+            if (container == null)
+                return;
+
+            if (root?.name != "_Temp")
+            {
+                Log.Debug("[Preview] Skipped DecalProjector — not part of a build preview.");
+                return;
+            }
+
+            // Must match an active variant
+            var variant = State.Current;
+            if (variant == null)
+                return;
+
+            float diameter = variant.Radius * 2f;
+            var oldSize = projector.size;
+
+            projector.size = new Vector3(diameter, diameter, oldSize.z);
+            Log.Debug($"[Preview] Radius set to {diameter:F2} for variant: {variant.ID}");
         }
     }
 }

@@ -44,8 +44,8 @@ namespace UpgradedTrashCans
 
         public static void InitializeSettings()
         {
-            TrashBinSettings = CreateGroup("01_TrashBin", "Upgraded Trash Bin", ColorOption.Green, ExtendedColorOption.Lime, 40, 5f, RankOption.Hoodlum, 1, false, 250f);
-            TrashCompactorSettings = CreateGroup("02_TrashCompactor", "Upgraded Trash Compactor", ColorOption.Blue, ExtendedColorOption.Indigo, 100, 8f, RankOption.Hustler, 5, false, 1000f);
+            TrashBinSettings = CreateGroup("01_TrashBin", "Upgraded Trash Bin", ColorOption.Green, ExtendedColorOption.Lime, 40, 4.5f, RankOption.Hoodlum, 1, false, 250f);
+            TrashCompactorSettings = CreateGroup("02_TrashCompactor", "Upgraded Trash Compactor", ColorOption.Blue, ExtendedColorOption.Indigo, 100, 7.5f, RankOption.Hustler, 5, false, 1000f);
 
             GrabberCategory = MelonPreferences.CreateCategory("UpgradedTrashCans_03_UpgradedTrashGrabber", "Trash Grabber Pro");
             Grabber_Price = GrabberCategory.CreateEntry("01_Price", 750f, "Price", "Set the shop price for the Trash Grabber Pro.");

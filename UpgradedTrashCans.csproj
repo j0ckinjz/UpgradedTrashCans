@@ -5,29 +5,28 @@
 		<RootNamespace>UpgradedTrashCans</RootNamespace> <!--Change this-->
 		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
-		<AssemblyVersion>1.5.9</AssemblyVersion>
-		<FileVersion>1.5.9</FileVersion>
+		<AssemblyVersion>1.6.0</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Configurations>MONO;IL2CPP</Configurations>
-		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'MONO'">
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>UpgradedTrashCans_Mono</AssemblyName> <!--Change this-->
+		<AssemblyName>$(RootNamespace)_Mono</AssemblyName> <!--Change this-->
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'IL2CPP'">
 		<TargetFramework>net6.0</TargetFramework>
-		<AssemblyName>UpgradedTrashCans_IL2Cpp</AssemblyName> <!--Change this-->
+		<AssemblyName>$(RootNamespace)_IL2Cpp</AssemblyName> <!--Change this-->
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)' == 'MONO'">
-		<S1Dir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I_Mono</S1Dir> <!--Change this-->
+		<S1Dir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I_Mono_Beta</S1Dir> <!--Change this-->
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)' == 'IL2CPP'">
-		<S1Dir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I</S1Dir> <!--Change this-->
+		<S1Dir>C:\Program Files (x86)\Steam\steamapps\common\Schedule I_Il2Cpp_Beta</S1Dir> <!--Change this-->
 	</PropertyGroup>
 
 
@@ -638,6 +637,9 @@
 		<Reference Include="Assembly-CSharp">
 			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
 			<Private>false</Private>
+		</Reference>	<Reference Include="Assembly-CSharp">
+			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
 		</Reference>
 		<Reference Include="Il2CppAeLa.EasyFeedback">
 			<HintPath>$(S1Dir)\MelonLoader\Il2CppAssemblies\Il2CppAeLa.EasyFeedback.dll</HintPath>
@@ -1230,6 +1232,7 @@
 		<Compile Include="Helpers\Helpers.cs" />
 		<Compile Include="Helpers\ModManager.cs" />
 		<Compile Include="Helpers\MultiplayerSync.cs" />
+		<Compile Include="Helpers\VersionHelper.cs" />
 		<Compile Include="Patches\Patches.cs" />
 		<!--<Compile Include="TemplateUtils\AssetBundleUtils.cs" />-->
 		<!--<Folder Include="Libs\" />-->
@@ -1248,6 +1251,7 @@
 	<!--Publicizer Entries-->
 	<ItemGroup Condition="'$(Configuration)' == 'MONO'">
 		<Publicize Include="Assembly-CSharp" />
+		<Publicize Include="UnityEngine" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

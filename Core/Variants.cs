@@ -47,7 +47,7 @@ namespace UpgradedTrashCans
                 Price = 250f,
                 Capacity = 40,
                 Color = Color.green,
-                Radius = 5f,
+                Radius = 4.5f,
                 RequiredRank = ERank.Hoodlum,
                 Tier = 1,
                 Type = TrashCanType.Bin
@@ -60,7 +60,7 @@ namespace UpgradedTrashCans
                 Price = 1000f,
                 Capacity = 100,
                 Color = Color.blue,
-                Radius = 8f,
+                Radius = 7.5f,
                 RequiredRank = ERank.Hustler,
                 Tier = 5,
                 Type = TrashCanType.Compactor

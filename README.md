@@ -1,99 +1,104 @@
-# 📦 Upgraded Trash Cans — Smarter Waste Management for *Schedule I*
+## 📦 Upgraded Trash Cans — Smarter Waste Management for *Schedule I*
 
-> **Main Il2Cpp Branch** & **Mono/Alternative Branch** releases available!
-
-This mod enhances trash-related gameplay by adding **two new trash can upgrades** and a **pro-level grabber** to the Hardware Store — all customizable and fully multiplayer compatible.
+This mod enhances trash-related gameplay by adding two new trash can upgrades and a pro-level grabber to the Hardware Store — all customizable and fully multiplayer compatible.
 
 ---
 
-## 🗑️ Hardware Store Upgrades
+### 🗑️ New Hardware Store Variants with Rank Requirements
 
-- **Trash Bin** — 40 capacity, medium cleaner radius  
-- **Trash Compactor** — 100 capacity, large cleaner radius  
+- **Trash Bin** — 40 capacity, medium cleaner radius
+- **Trash Compactor** — 100 capacity, large cleaner radius
 - **Trash Grabber Pro** — 50 capacity
 
 Each variant:
-- Has custom price, name, and color tint
-- Uses original game models with enhanced stats
-- Unlocks via rank or instantly (configurable)
-- Works in multiplayer with full sync
+- Includes custom name, price, and color tint
+- Shows up as a separate item in the shop
+- Works like the original but with upgraded stats
+- Is visible in build mode and storage with a distinct color
+- Has its own unlock rank. Level up to unlock these upgraded items.
 
 ---
 
-## ⚙️ Customization via Mod Manager (Optional)
+### ⚙️ Customization (Optional)
 
-Use the in-game Mod Manager Phone App to adjust:
-- Price, capacity, radius (for cans)
-- Color mode: standard, extended, or custom RGB
-- Unlock rank, tier, or toggle unlock immediately  
-*Changes apply on the next scene load.*
+Use the Mod Manager Phone App (if installed) to tweak:
+- Price
+- Capacity
+- Cleaner pickup radius (trash cans)
+- Color tint (standard, extended, or custom RGB)
+- Required rank / tier
+- Unlock Immediately toggle
 
-> 💡 If dropdowns aren’t working, update Mod Manager.
-
----
-
-## 🎨 Using Custom RGB Values
-
-You can manually enter RGB color values in the Mod Manager:
-
-- **Format**: `R,G,B`  
-- **Example**: `0.2f, 0.8f, 0.2f` → bright lime green  
-- Alpha is always set to `1f` (fully opaque)
-
-Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReference/Color.html)
-
-> Tip: You can use full decimal precision or round to 2 decimal places.
+*Changes take effect on the next scene load.*  
+*If the dropdown isn't working, you may need to update Mod Manager.*
 
 ---
 
-## 🔄 Multiplayer Sync
+### 🎨 Using Custom RGB Values in Mod Manager
 
-- Host settings override all clients
-- Variants sync on join with a retry system
-- Mod disables injection if host does not have the mod
+You can manually enter RGB color values for your trash cans or grabber using the **Custom RGB** field in the Mod Manager Phone App.
 
----
+- Format: `R,G,B`
+- Example: `0.2f, 0.8f, 0.2f` will give you a bright lime green
+- Only the first 3 values are needed — Alpha (transparency) is always set to `1f` automatically
 
-### 🧑‍🤝‍🧑 Compatibility Matrix
+Need inspiration? Here's the official list of Unity color values:  
+https://docs.unity3d.com/ScriptReference/Color.html
 
-| Host | Client | Result |
-|------|--------|--------|
-| ✅ Has Mod | ✅ Has Mod | Full sync — correct variants and stats |
-| ✅ Has Mod | ❌ No Mod  | Partial — client sees base visuals, can't pick up |
-| ❌ No Mod  | ✅ Has Mod | No injection — mod disables itself |
+*Tip: You may enter full decimal precision, but I usually round to the second place. Each value represents the intensity of Red, Green, or Blue.*
 
 ---
 
-## ⚠️ Known Issues
+### 🔄 Multiplayer Support
 
-- Saving without the mod will remove upgraded items from your save  
-- In multiplayer, remote players may briefly see base models before sync  
-  The mod retries up to 10 times with short delays
+- Host’s settings are automatically synced to all clients
+- Clients apply synced values after joining using a safe retry system
+- Includes mod version compatibility checks to prevent desync
+- Clients will not inject upgraded items if host mod is disabled or missing
+
+#### Multiplayer Compatibility Matrix
+
+✅ **Host Has Mod** | ✅ **Client Has Mod**  
+*Full Sync* — Host settings override client settings. Variants appear and behave as expected.
+
+✅ **Host Has Mod** | ❌ **Client No Mod**  
+*Partial Support* — Host can buy/place variants. Client sees base visuals. Trash cans function but can't be picked up by clients.
+
+❌ **Host No Mod** | ✅ **Client Has Mod**  
+*No Injection* — Mod skips shop injection.
 
 ---
 
-## 📦 Changelog
+### ⚠️ Known Issues / Limitations
 
-### v1.5.4
-- 🔔 **Updates Checker Support**: Added metadata compatibility with `Updates Checker`
-  → Mod version can now be tracked automatically.
-- 🧹 **Code Cleanup & Null Safety**: Improved internal stability with better null checks and safer initialization handling.
-- ⚙️ **Early Settings Initialization**: Moved ModManager Preferences to initialize earlier.
+- **Saving the game while the mod is disabled** will remove all upgraded trash items from your save.  
+  You will need to re-purchase them after re-enabling the mod.
 
-### v1.5.3 to v1.0
-- Available on [GitHub](https://github.com/j0ckinjz/UpgradedTrashCans/blob/main/CHANGELOG.md)
+- In **multiplayer**, when a client places an upgraded trash can, other players may briefly see a normal gray trash can.  
+  This happens because the game must first sync the object over the network before the mod can apply its changes.  
+  The mod will retry up to 10 times, with a 2-frame delay between each attempt.  
+  (In testing, it typically synced correctly within 3 tries.)
 
 ---
 
-## 💾 Installation
+### 🔀 Which Version Should I Use?
 
-1. Install MelonLoader for *Schedule I*  
-2. Drop `UpgradedTrashCans.dll` into the `Mods/` folder  
+- **Il2Cpp** — For the **Main Branch** (Recommended if you're not sure)
+- **Mono** — For the **Alternative Branch** (You would’ve set this manually, so you’ll know if you’re using it)
+
+> Make sure to copy the version that matches your game branch. Mismatched versions won’t work!
+
+---
+
+### 💾 Installation
+
+1. Install MelonLoader for *Schedule I*
+2. Drop `UpgradedTrashCans.dll` into the `Mods` folder
 3. Launch the game — upgrades will appear in the Hardware Store
 
 ---
 
-## 🐞 Bug Reporting
+### 🐞 Bug Reporting
 
 1. Open the Mod Manager Phone App → UpgradedTrashCan settings  
 2. Scroll to the bottom and enable **Debug Logging**  
@@ -103,15 +108,15 @@ Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReferen
 
 ---
 
-## 🧪 Notes
+### 🧪 Notes
 
-- Items persist across save/load  
-- Custom tints apply even when shelved  
-- Uses original prefabs — no additional assets required
+- Items persist across save/load
+- Custom tints apply even when shelved
+- Uses original game prefabs — no extra assets required
 
 ---
 
-## 📁 Source Code & Releases
+### 📁 Source Code & Releases
 
 - 💻 GitHub: [j0ckinjz/UpgradedTrashCans](https://github.com/j0ckinjz/UpgradedTrashCans)
 - 📦 Thunderstore: [j0ckinjz on Thunderstore](https://thunderstore.io/c/schedule-i/p/j0ckinjz/)
@@ -122,8 +127,10 @@ Need inspiration? [Unity Color Reference](https://docs.unity3d.com/ScriptReferen
 
 ---
 
-## 📝 Author’s Note
+### 📝 Author’s Note
 
-The goal of this mod was to add meaningful, progression-based upgrades to trash handling in *Schedule I*. Each variant has balanced stats with optional customization via Mod Manager.
+The original vision of this mod was to offer more **progression-based content** to the trash management system of the game.  
+That’s why each upgrade includes reasonable capacity, radius, prices, and rank requirements.
 
-> This mod is not a cheat — it’s designed to give players more flexibility while preserving game balance.
+As development progressed, I added optional support for the **ModManager Phone App**. This may allow players to set values far beyond intended balance.  
+*Please note: this mod was not designed to be a cheat — it’s meant to give users the freedom to fine-tune values to their preferred playstyle.*

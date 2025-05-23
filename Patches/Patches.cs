@@ -1,19 +1,27 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using MelonLoader;
+using UnityEngine.Rendering.Universal;
+using System.Collections;
 #if IL2CPP
 using Il2CppScheduleOne.Equipping;
 using Il2CppScheduleOne.ObjectScripts;
 using Il2CppScheduleOne.Storage;
+using Il2CppScheduleOne.Building;
+using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.Trash;
 using Il2CppScheduleOne.NPCs.Behaviour;
+using Il2CppScheduleOne.UI.Items;
 using Il2CppScheduleOne.Property;
 #elif MONO
 using ScheduleOne.Equipping;
 using ScheduleOne.ObjectScripts;
 using ScheduleOne.Storage;
+using ScheduleOne.Building;
+using ScheduleOne.ItemFramework;
 using ScheduleOne.Trash;
 using ScheduleOne.NPCs.Behaviour;
+using ScheduleOne.UI.Items;
 using ScheduleOne.Property;
 #endif
 
@@ -75,18 +83,11 @@ namespace UpgradedTrashCans
             VisualHelper.TintRenderers(__instance.transform, variant.Color, "Body", "Trigger");
         }
     }
-#if IL2CPP
-    [HarmonyPatch(typeof(Il2CppScheduleOne.UI.Items.TrashGrabberItemUI), nameof(Il2CppScheduleOne.UI.Items.TrashGrabberItemUI.UpdateUI))]
-#elif MONO
-    [HarmonyPatch(typeof(ScheduleOne.UI.Items.TrashGrabberItemUI), nameof(ScheduleOne.UI.Items.TrashGrabberItemUI.UpdateUI))]
-#endif
+
+    [HarmonyPatch(typeof(TrashGrabberItemUI), nameof(TrashGrabberItemUI.UpdateUI))]
     public static class Patch_TrashGrabberItemUI_UpdateUI
     {
-#if IL2CPP
-        public static void Postfix(Il2CppScheduleOne.UI.Items.TrashGrabberItemUI __instance)
-#elif MONO
-        public static void Postfix(ScheduleOne.UI.Items.TrashGrabberItemUI __instance)
-#endif
+        public static void Postfix(TrashGrabberItemUI __instance)
         {
             if (__instance == null) return;
 
@@ -130,12 +131,10 @@ namespace UpgradedTrashCans
     {
         public static void Postfix(TrashContainerItem __instance)
         {
-            // Start the coroutine from a MonoBehaviour context
-            if (__instance != null)
-                MelonCoroutines.Start(WaitForValidName(__instance));
+            MelonCoroutines.Start(WaitForValidName(__instance));
         }
 
-        private static System.Collections.IEnumerator WaitForValidName(TrashContainerItem instance)
+        private static IEnumerator WaitForValidName(TrashContainerItem instance)
         {
             const int retryDelayFrames = 2;
             const int maxRetries = 10;
@@ -152,7 +151,7 @@ namespace UpgradedTrashCans
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug($"[TrashContainerItem Start] Exception accessing Name on attempt {attempts + 1}: {ex.Message}");
+                    Log.Debug($"Exception accessing Name on attempt {attempts + 1}: {ex.Message}");
                 }
 
                 if (!string.IsNullOrWhiteSpace(name))
@@ -162,13 +161,13 @@ namespace UpgradedTrashCans
                 }
 
                 attempts++;
-                Log.Debug($"[TrashContainerItem Start] Name was null or errored on attempt {attempts}/{maxRetries}. Retrying after {retryDelayFrames} frames...");
+                Log.Debug($"Name was null or errored on attempt {attempts}/{maxRetries}. Retrying after {retryDelayFrames} frames...");
 
                 for (int i = 0; i < retryDelayFrames; i++)
                     yield return null;
             }
 
-            Log.Debug("[TrashContainerItem Start] Name remained null after all retry attempts.");
+            Log.Debug("Name remained null after all retry attempts.");
         }
 
         private static void ApplyVariantSettings(TrashContainerItem instance, string name)
@@ -183,14 +182,38 @@ namespace UpgradedTrashCans
                     container.TrashCapacity = variant.Capacity;
                 }
 
-                instance.PickupRadius = variant.Radius;
+                float radius = variant.Radius;
+                var type = instance.GetType();
+
+                if (VersionHelper.IsBetaOrNewer)
+                {
+                    var squareProp = type.GetProperty("PickupSquareWidth");
+                    var calcProp = type.GetProperty("calculatedPickupRadius");
+
+                    if (squareProp != null && squareProp.CanWrite)
+                        squareProp.SetValue(instance, variant.Radius);
+
+                    if (calcProp != null && calcProp.CanWrite)
+                        calcProp.SetValue(instance, variant.Radius * Mathf.Sqrt(2f));
+
+                    Log.Debug($"Set PickupSquareWidth + calculatedPickupRadius via reflection");
+                }
+                else
+                {
+                    var radiusProp = type.GetProperty("PickupRadius");
+                    if (radiusProp != null && radiusProp.CanWrite)
+                        radiusProp.SetValue(instance, variant.Radius);
+
+                    Log.Debug($"Set PickupRadius via reflection");
+                }
+
 
                 if (instance.PickupAreaProjector != null)
                 {
-                    float diameter = variant.Radius * 2f;
+                    float diameter = radius * 2f;
                     instance.PickupAreaProjector.size = new Vector3(diameter, diameter, instance.PickupAreaProjector.size.z);
 
-                    Log.Debug($"[TrashContainer] Set projector size to ({diameter:F2}, {diameter:F2}, {instance.PickupAreaProjector.size.z:F2}) for radius {variant.Radius:F2}");
+                    Log.Debug($"Set projector size to ({diameter:F2}, {diameter:F2}, {instance.PickupAreaProjector.size.z:F2}) using PickupSquareWidth");
                 }
 
                 VisualHelper.TintRenderers(instance.transform, variant.Color, "Body");
@@ -205,7 +228,7 @@ namespace UpgradedTrashCans
     {
         public static void Postfix(BagTrashCanBehaviour __instance, ref bool __result)
         {
-            if (!__result) return; // only override if it already passed default checks
+            if (!__result) return;
 
             var item = __instance?.TargetTrashCan;
             var container = item?.Container;
@@ -221,14 +244,57 @@ namespace UpgradedTrashCans
 
             if (container.TrashLevel < container.TrashCapacity)
             {
-                __result = false; // Block early bagging
+                __result = false;
             }
         }
     }
 
+    [HarmonyPatch(typeof(BuildStart_Grid), nameof(BuildStart_Grid.StartBuilding))]
+    public static class Patch_BuildStartGrid_StartBuilding
+    {
+        public static bool Prepare() => VersionHelper.IsBetaOrNewer;
+        public static void Postfix(ItemInstance itemInstance)
+        {
+            PreviewHelper.TrackPreviewVariant(itemInstance);
+        }
+    }
+
+    [HarmonyPatch(typeof(DecalProjector), "OnEnable")]
+    public static class Patch_DecalProjector_OnEnable
+    {
+        public static bool Prepare() => VersionHelper.IsBetaOrNewer;
+        public static void Postfix(DecalProjector __instance)
+        {
+            MelonCoroutines.Start(DelayedRadiusCheck(__instance));
+        }
+
+        private static IEnumerator DelayedRadiusCheck(DecalProjector projector)
+        {
+            yield return null;
+
+            PreviewHelper.ApplyRadiusIfValid(projector);
+        }
+    }
+
+    [HarmonyPatch(typeof(DecalProjector), "OnDisable")]
+    public static class Patch_DecalProjector_OnDisable
+    {
+        public static bool Prepare() => VersionHelper.IsBetaOrNewer;
+        public static void Postfix(DecalProjector __instance)
+        {
+            var root = __instance.transform?.root;
+            var container = root?.GetComponentInChildren<TrashContainer>();
+            if (container == null)
+                return;
+
+            PreviewHelper.State.Current = null;
+            Log.Debug("Cleared active preview variant after ghost disable.");
+        }
+    }
     [HarmonyPatch(typeof(Property), nameof(Property.DoBoundsContainPoint))]
     public static class Patch_Manor_DoBoundsContainPoint
     {
+        public static bool Prepare() => !VersionHelper.IsBetaOrNewer;
         private static readonly Vector2[] skipBinPolygon = new Vector2[]
         {
         new Vector2(174f, -63.5f),
