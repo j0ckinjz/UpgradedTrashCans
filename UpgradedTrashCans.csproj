@@ -5,8 +5,8 @@
 		<RootNamespace>UpgradedTrashCans</RootNamespace> <!--Change this-->
 		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
-		<AssemblyVersion>1.6.0</AssemblyVersion>
-		<FileVersion>1.6.0</FileVersion>
+		<AssemblyVersion>1.5.9</AssemblyVersion>
+		<FileVersion>1.5.9</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
