@@ -1,6 +1,6 @@
 ﻿using MelonLoader;
 
-[assembly: MelonInfo(typeof(UpgradedTrashCans.Core), "UpgradedTrashCans", "1.6.0", "j0ckinjz")]
+[assembly: MelonInfo(typeof(UpgradedTrashCans.Core), "UpgradedTrashCans", "1.5.9", "j0ckinjz")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 [assembly: System.Reflection.AssemblyMetadata("NexusModID", "928")]
 
