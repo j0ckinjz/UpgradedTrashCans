@@ -1,11 +1,15 @@
 # 📦 Upgraded Trash Cans — Changelog
 
-## v1.6.0 – Now Compatible with v0.3.6 Beta 
-- 🔲 **Square Radius Patch**: Patched new square `PickupSquareWidth` radius system
-  → Radius and visuals now correctly reflect variant during placement  
-- 🧪 **Version Detection Added**: Automatically detects game version and applies correct radius logic (legacy vs beta)  
-- 🛠️ **Legacy Compatibility Maintained**: Uses runtime reflection to support `PickupRadius` in v0.3.5f3
-- This version may be buggy as it required some code rework to maintain compatibility between both versions of the game. I will probably remove support for v0.3.5f3 once v0.3.6 is out of beta.
+## v1.6.1
+
+- ❌ Removed support for v0.3.5 — now requires Schedule I v0.3.6+
+- 🧲 **Trash Grabber Pro Upgrades**
+  - **Quick Eject**: `Shift`+`Mouse Click` to eject all trash
+  - **Radius Pickup**: `Shift` + `R` to toggle radius mode  
+    → Press `E` to grab all items in the radius
+	
+## v1.6.0 - For Beta v0.3.6
+- Patched new square pickup radius
 
 ## v1.5.9 - **Last Update for v0.3.5f3, future updates will be for v0.3.6+**
 - 🧠 **Definition Injection Refactor**: Trash Can and Grabber variants now clone their base definitions directly from the Registry  

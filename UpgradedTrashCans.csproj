@@ -5,7 +5,7 @@
 		<RootNamespace>UpgradedTrashCans</RootNamespace> <!--Change this-->
 		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
-		<AssemblyVersion>1.6.0</AssemblyVersion>
+		<AssemblyVersion>1.6.1</AssemblyVersion>
 		<FileVersion>$(AssemblyVersion)</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<LangVersion>latest</LangVersion>
@@ -1229,10 +1229,10 @@
 		<Compile Include="Core.cs" />
 		<Compile Include="Core\TrashInjector.cs" />
 		<Compile Include="Core\Variants.cs" />
+		<Compile Include="Helpers\GrabberHelper.cs" />
 		<Compile Include="Helpers\Helpers.cs" />
 		<Compile Include="Helpers\ModManager.cs" />
 		<Compile Include="Helpers\MultiplayerSync.cs" />
-		<Compile Include="Helpers\VersionHelper.cs" />
 		<Compile Include="Patches\Patches.cs" />
 		<!--<Compile Include="TemplateUtils\AssetBundleUtils.cs" />-->
 		<!--<Folder Include="Libs\" />-->

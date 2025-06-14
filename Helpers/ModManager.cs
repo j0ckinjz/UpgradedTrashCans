@@ -40,6 +40,9 @@ namespace UpgradedTrashCans
         public static MelonPreferences_Entry<bool> Grabber_UnlockImmediately;
         public static MelonPreferences_Entry<float> Grabber_Price;
         public static MelonPreferences_Entry<string> Grabber_CustomRGB;
+        public static MelonPreferences_Entry<bool> Grabber_BulkEject;
+        public static MelonPreferences_Entry<bool> Grabber_RadiusPickup;
+        public static MelonPreferences_Entry<float> Grabber_Radius;
         public static MelonPreferences_Entry<bool> DebugLogs;
 
         public static void InitializeSettings()
@@ -57,6 +60,9 @@ namespace UpgradedTrashCans
             Grabber_Color = GrabberCategory.CreateEntry("07_Color", ColorOption.Cyan, "Standard Colors", "Select the color of the Trash Grabber Pro.");
             Grabber_ExtendedColor = GrabberCategory.CreateEntry("08_ExtendedColor", ExtendedColorOption.Teal, "Extended Colors", "Custom expanded tints.");
             Grabber_CustomRGB = GrabberCategory.CreateEntry("09_CustomRGB", "0.5f, 0.5f, 0.5f", "Custom RGB Values", "Format: R,G,B (0–1 range)");
+            Grabber_BulkEject = GrabberCategory.CreateEntry("10_Enable Bulk Eject", true, "Enable Shift+Click Eject All");
+            Grabber_RadiusPickup = GrabberCategory.CreateEntry("11_EnableRadiusPickup", true, "Enable Radius Toggle (Shift+R)", "Adds a pickup radius.");
+            Grabber_Radius = GrabberCategory.CreateEntry("12_GrabberRadius", 1f, "Grabber Radius (0.5 - 3)", "Adjusts the size of the pickup radius.");
 
             DebugCategory = MelonPreferences.CreateCategory("UpgradedTrashCans_04_DebugLogs", "Enable Debug Logging");
             DebugLogs = DebugCategory.CreateEntry("01_Debug", false, "Enable Debug Logs");

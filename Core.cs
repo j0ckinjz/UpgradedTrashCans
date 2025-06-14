@@ -1,7 +1,6 @@
 ﻿using MelonLoader;
-using UnityEngine;
 
-[assembly: MelonInfo(typeof(UpgradedTrashCans.Core), "UpgradedTrashCans", "1.6.0", "j0ckinjz")]
+[assembly: MelonInfo(typeof(UpgradedTrashCans.Core), "UpgradedTrashCans", "1.6.1", "j0ckinjz")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 [assembly: System.Reflection.AssemblyMetadata("NexusModID", "928")]
 
@@ -11,13 +10,6 @@ namespace UpgradedTrashCans
     {
         public override void OnInitializeMelon()
         {
-            Log.Msg($"[UpgradedTrashCans] Game version: {Application.version}");
-
-            if (VersionHelper.IsBetaOrNewer)
-                Log.Msg("[UpgradedTrashCans] Detected beta or newer version — using PickupSquareWidth");
-            else
-                Log.Msg("[UpgradedTrashCans] Detected legacy version — using PickupRadius");
-
             ModManager.InitializeSettings();
             Log.Msg($"Mod Initialized. Version {Info.Version}");
         }
@@ -29,7 +21,11 @@ namespace UpgradedTrashCans
                 DefinitionTracker.ClearAll();
                 MelonCoroutines.Start(TrashInjector.InitializeShopListings());
             }
-        }        
+        }
+        public override void OnUpdate()
+        {
+            TrashGrabberRadiusManager.Update();
+        }
     }
 
     internal static class Log

@@ -12,7 +12,6 @@ using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.Trash;
 using Il2CppScheduleOne.NPCs.Behaviour;
 using Il2CppScheduleOne.UI.Items;
-using Il2CppScheduleOne.Property;
 #elif MONO
 using ScheduleOne.Equipping;
 using ScheduleOne.ObjectScripts;
@@ -22,7 +21,6 @@ using ScheduleOne.ItemFramework;
 using ScheduleOne.Trash;
 using ScheduleOne.NPCs.Behaviour;
 using ScheduleOne.UI.Items;
-using ScheduleOne.Property;
 #endif
 
 namespace UpgradedTrashCans
@@ -36,6 +34,38 @@ namespace UpgradedTrashCans
         {
             KnownGrabberIDs = TrashGrabberVariants.All.Select(v => v.ID).ToHashSet();
             GrabberByID = TrashGrabberVariants.All.ToDictionary(v => v.ID);
+        }
+    }
+
+    [HarmonyPatch(typeof(Equippable_TrashGrabber), nameof(Equippable_TrashGrabber.Update))]
+    public static class Patch_TrashGrabber_Update
+    {
+        public static bool Prefix(Equippable_TrashGrabber __instance)
+        {
+            if (!Equippable_TrashGrabber.IsEquipped)
+                return true;
+
+            if (!ModManager.Grabber_BulkEject.Value)
+                return true;
+
+            if (__instance.itemInstance?.ID == null ||
+                !VariantLookup.GrabberByID.TryGetValue(__instance.itemInstance.ID, out var variant) ||
+                variant.ID != "trash_grabber_pro")
+                return true;
+
+            if (Input.GetMouseButtonDown(0) &&
+                (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+            {
+                TrashGrabberExtensions.EjectAllTrashNow(__instance);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static void Postfix(Equippable_TrashGrabber __instance)
+        {
+            TrashGrabberRadiusManager.RegisterActiveGrabber(__instance);
         }
     }
 
@@ -131,6 +161,13 @@ namespace UpgradedTrashCans
     {
         public static void Postfix(TrashContainerItem __instance)
         {
+            if (__instance == null)
+                return;
+
+            var container = __instance.GetComponent<TrashContainer>();
+            if (container == null)
+                return;
+
             MelonCoroutines.Start(WaitForValidName(__instance));
         }
 
@@ -151,7 +188,7 @@ namespace UpgradedTrashCans
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug($"Exception accessing Name on attempt {attempts + 1}: {ex.Message}");
+                    Log.Debug($"[TrashContainerItem Start] Exception accessing Name on attempt {attempts + 1}: {ex.Message}");
                 }
 
                 if (!string.IsNullOrWhiteSpace(name))
@@ -161,13 +198,13 @@ namespace UpgradedTrashCans
                 }
 
                 attempts++;
-                Log.Debug($"Name was null or errored on attempt {attempts}/{maxRetries}. Retrying after {retryDelayFrames} frames...");
+                Log.Debug($"[TrashContainerItem Start] Name was null or errored on attempt {attempts}/{maxRetries}. Retrying after {retryDelayFrames} frames...");
 
                 for (int i = 0; i < retryDelayFrames; i++)
                     yield return null;
             }
 
-            Log.Debug("Name remained null after all retry attempts.");
+            Log.Debug("[TrashContainerItem Start] Name remained null after all retry attempts.");
         }
 
         private static void ApplyVariantSettings(TrashContainerItem instance, string name)
@@ -183,37 +220,15 @@ namespace UpgradedTrashCans
                 }
 
                 float radius = variant.Radius;
-                var type = instance.GetType();
-
-                if (VersionHelper.IsBetaOrNewer)
-                {
-                    var squareProp = type.GetProperty("PickupSquareWidth");
-                    var calcProp = type.GetProperty("calculatedPickupRadius");
-
-                    if (squareProp != null && squareProp.CanWrite)
-                        squareProp.SetValue(instance, variant.Radius);
-
-                    if (calcProp != null && calcProp.CanWrite)
-                        calcProp.SetValue(instance, variant.Radius * Mathf.Sqrt(2f));
-
-                    Log.Debug($"Set PickupSquareWidth + calculatedPickupRadius via reflection");
-                }
-                else
-                {
-                    var radiusProp = type.GetProperty("PickupRadius");
-                    if (radiusProp != null && radiusProp.CanWrite)
-                        radiusProp.SetValue(instance, variant.Radius);
-
-                    Log.Debug($"Set PickupRadius via reflection");
-                }
-
+                instance.PickupSquareWidth = radius;
+                instance.calculatedPickupRadius = radius * Mathf.Sqrt(2f);
 
                 if (instance.PickupAreaProjector != null)
                 {
                     float diameter = radius * 2f;
                     instance.PickupAreaProjector.size = new Vector3(diameter, diameter, instance.PickupAreaProjector.size.z);
 
-                    Log.Debug($"Set projector size to ({diameter:F2}, {diameter:F2}, {instance.PickupAreaProjector.size.z:F2}) using PickupSquareWidth");
+                    Log.Debug($"[TrashContainer] Set projector size to ({diameter:F2}, {diameter:F2}, {instance.PickupAreaProjector.size.z:F2}) using PickupSquareWidth");
                 }
 
                 VisualHelper.TintRenderers(instance.transform, variant.Color, "Body");
@@ -252,7 +267,6 @@ namespace UpgradedTrashCans
     [HarmonyPatch(typeof(BuildStart_Grid), nameof(BuildStart_Grid.StartBuilding))]
     public static class Patch_BuildStartGrid_StartBuilding
     {
-        public static bool Prepare() => VersionHelper.IsBetaOrNewer;
         public static void Postfix(ItemInstance itemInstance)
         {
             PreviewHelper.TrackPreviewVariant(itemInstance);
@@ -262,7 +276,6 @@ namespace UpgradedTrashCans
     [HarmonyPatch(typeof(DecalProjector), "OnEnable")]
     public static class Patch_DecalProjector_OnEnable
     {
-        public static bool Prepare() => VersionHelper.IsBetaOrNewer;
         public static void Postfix(DecalProjector __instance)
         {
             MelonCoroutines.Start(DelayedRadiusCheck(__instance));
@@ -279,7 +292,6 @@ namespace UpgradedTrashCans
     [HarmonyPatch(typeof(DecalProjector), "OnDisable")]
     public static class Patch_DecalProjector_OnDisable
     {
-        public static bool Prepare() => VersionHelper.IsBetaOrNewer;
         public static void Postfix(DecalProjector __instance)
         {
             var root = __instance.transform?.root;
@@ -288,50 +300,7 @@ namespace UpgradedTrashCans
                 return;
 
             PreviewHelper.State.Current = null;
-            Log.Debug("Cleared active preview variant after ghost disable.");
-        }
-    }
-    [HarmonyPatch(typeof(Property), nameof(Property.DoBoundsContainPoint))]
-    public static class Patch_Manor_DoBoundsContainPoint
-    {
-        public static bool Prepare() => !VersionHelper.IsBetaOrNewer;
-        private static readonly Vector2[] skipBinPolygon = new Vector2[]
-        {
-        new Vector2(174f, -63.5f),
-        new Vector2(176f, -63.5f),
-        new Vector2(176f, -60f),
-        new Vector2(174f, -60f)
-        };
-
-        public static void Postfix(Property __instance, Vector3 point, ref bool __result)
-        {
-            if (__instance.PropertyName == "Manor" && __result)
-            {
-                Vector2 testPoint = new Vector2(point.x, point.z);
-                if (PointInPolygon(testPoint, skipBinPolygon))
-                {
-                    __result = false;
-                }
-            }
-        }
-
-        // Ray casting algorithm for point-in-polygon
-        private static bool PointInPolygon(Vector2 point, Vector2[] polygon)
-        {
-            int j = polygon.Length - 1;
-            bool inside = false;
-
-            for (int i = 0; i < polygon.Length; j = i++)
-            {
-                if ((polygon[i].y > point.y) != (polygon[j].y > point.y) &&
-                    point.x < (polygon[j].x - polygon[i].x) * (point.y - polygon[i].y) /
-                               (polygon[j].y - polygon[i].y) + polygon[i].x)
-                {
-                    inside = !inside;
-                }
-            }
-
-            return inside;
+            Log.Debug("[Preview] Cleared active preview variant after ghost disable.");
         }
     }
 }

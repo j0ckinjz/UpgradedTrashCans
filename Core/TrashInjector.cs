@@ -27,7 +27,6 @@ namespace UpgradedTrashCans
                 yield break;
             }
 
-            // Collect all hardware stores in the scene
             var hardwareStores = new List<ShopInterface>();
             try
             {
@@ -53,7 +52,6 @@ namespace UpgradedTrashCans
                 yield break;
             }
 
-            // Locate base TrashCan and TrashGrabber definitions in Registry
             BuildableItemDefinition baseTrashCan = null;
             TrashGrabberDefinition baseGrabber = null;
 
@@ -83,7 +81,6 @@ namespace UpgradedTrashCans
                     break;
             }
 
-            // Inject variants
             if (baseTrashCan != null)
             {
                 foreach (var variant in TrashCanVariants.All)
@@ -100,7 +97,6 @@ namespace UpgradedTrashCans
                 }
             }
 
-            // Inject the new listings into all stores
             foreach (var shop in hardwareStores)
             {
                 foreach (var variant in TrashCanVariants.All)
@@ -174,7 +170,6 @@ namespace UpgradedTrashCans
                 return;
             }
 
-            // Clone the definition only — reuse the prefab
             var def = UnityEngine.Object.Instantiate(baseDef);
             def.Name = variant.Name;
             def.ID = variant.ID;
@@ -186,7 +181,6 @@ namespace UpgradedTrashCans
             if (!variant.UnlockImmediately)
                 def.RequiredRank = new FullRank(variant.RequiredRank, variant.Tier);
 
-            // Tint the icon
             if (baseDef.Icon != null)
             {
                 def.Icon = SpriteLoader.TintSprite(baseDef.Icon, variant.Color, $"{variant.Name}_Icon");
@@ -195,10 +189,9 @@ namespace UpgradedTrashCans
             {
                 Log.Warn($"{baseDef.Name} has no icon.");
             }
-            // Use the network-safe built prefab (no cloning)
+
             def.BuiltItem = baseDef.BuiltItem;
 
-            // Track definition for runtime customization
             DefinitionTracker.TrackDefinition(def);
             variant.Definition = def;
         }
@@ -227,7 +220,6 @@ namespace UpgradedTrashCans
             else
                 Log.Debug($"{baseDef.Name} icon not found.");
 
-            // Reuse the base prefab
             def.Equippable = baseDef.Equippable;
 
             DefinitionTracker.TrackDefinition(def);

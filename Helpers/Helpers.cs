@@ -212,18 +212,10 @@ namespace UpgradedTrashCans
             if (go == null)
                 return;
 
-            // Must contain a trash container
             var container = root.GetComponentInChildren<TrashContainer>();
             if (container == null)
                 return;
 
-            if (root?.name != "_Temp")
-            {
-                Log.Debug("[Preview] Skipped DecalProjector — not part of a build preview.");
-                return;
-            }
-
-            // Must match an active variant
             var variant = State.Current;
             if (variant == null)
                 return;
