@@ -19,6 +19,17 @@ Each variant:
 
 ---
 
+### Usage
+
+The Trash Grabber now has the following key bindings:
+
+- Eject all trash at once with <code>SHIFT</code>, left or right, and <code>Left Mouse Button</code>
+- Enable/Disable the pickup radius with <code>R</code>
+
+*These are not configurable currently.* 
+
+---
+
 ### ⚙️ Customization (Optional)
 
 Use the Mod Manager Phone App (if installed) to tweak:
